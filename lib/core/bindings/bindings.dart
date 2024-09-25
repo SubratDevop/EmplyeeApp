@@ -7,7 +7,7 @@ class ControllerBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<GetStorageService>(() => GetStorageService());
-    Get.put(NetworkServiceController());
+    // Get.put(NetworkServiceController());
     // Get.put(AuthController());
     // Get.lazyPut<AuthService>(() => AuthService());
 

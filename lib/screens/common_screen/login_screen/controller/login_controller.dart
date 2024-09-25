@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../core/handler/dio_handler.dart';
 import '../../../../core/urls/app_urls.dart';
 import '../../../../core/utils/enums.dart';
@@ -46,6 +47,4 @@ class LoginController extends GetxController {
     generatingOTP.value = false;
     update();
   }
-
-
 }

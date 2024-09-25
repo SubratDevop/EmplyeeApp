@@ -1,11 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
+
 import 'package:employee_app/core/extesnions/sizedbox.dart';
 import 'package:employee_app/core/resources/colors.dart';
 import 'package:employee_app/core/resources/screen_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:slider_button/slider_button.dart';
+
 import '../../core/resources/app_text_size.dart';
 import '../common_screen/otp_screen/otp_screen.dart';
 import 'model/feature_widget_model.dart';
@@ -125,14 +128,18 @@ class HomeScreen extends StatelessWidget {
               shrinkWrap: true,
               itemCount: featureList.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 1,
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 15),
+                  childAspectRatio: 2,
+                  // crossAxisCount: 4,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 14),
               itemBuilder: (_, index) {
-                return FeatureWidget(
-                  tittle: featureList[index].tittle!,
-                  iconPath: featureList[index].iconPath!,
+                return InkWell(
+                  onTap: () => Get.to(() => featureScreens[index]),
+                  child: FeatureWidget(
+                    tittle: featureList[index].tittle!,
+                    iconPath: featureList[index].iconPath!,
+                  ),
                 );
               },
             ),

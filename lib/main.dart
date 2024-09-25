@@ -1,4 +1,5 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:employee_app/testing_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -7,8 +8,8 @@ import 'package:get/get.dart';
 
 import 'core/bindings/bindings.dart';
 import 'core/resources/strings.dart';
+import 'core/routes/app_routes.dart';
 import 'core/widgets/app_status_bar.dart';
-import 'screens/home_screen/home_screen.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
@@ -42,9 +43,10 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: Strings.appName,
           initialBinding: ControllerBinding(),
-          initialRoute: '/',
-          // getPages: getPages,
-          home: const HomeScreen(),
+          // initialRoute: '/',
+          initialRoute: '/HomeScreen',
+          getPages: getPages,
+          // home: const RideInfoCard(),
         );
       },
     );
