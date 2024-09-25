@@ -3,9 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'app_text_size.dart';
 import 'colors.dart';
-import 'dimensions.dart';
 
 InputDecoration formFieldDeocration(
     {required String hintText,
@@ -17,28 +15,24 @@ InputDecoration formFieldDeocration(
     counterText: "",
     hintText: hintText,
     hintStyle: GoogleFonts.poppins(
-      fontSize: AppTextSize.body1TextSize,
+      fontSize: 16,
       fontWeight: FontWeight.w400,
       color: AppColor.hintTextColor,
     ),
     contentPadding: contentPaddingg ??
         const EdgeInsets.symmetric(horizontal: 11, vertical: 18),
     focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: Color(0xFF3F8AE0)),
-        borderRadius:
-            BorderRadius.circular(Dimensions.curverContainerRadius - 22)),
+        borderSide: const BorderSide(color: Color(0xFF5151D6)),
+        borderRadius: BorderRadius.circular(12)),
     enabledBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: Color(0xFFCBD6D6)),
-        borderRadius:
-            BorderRadius.circular(Dimensions.curverContainerRadius - 22)),
+        borderSide: const BorderSide(color: Color(0xFF8595AB)),
+        borderRadius: BorderRadius.circular(12)),
     errorBorder: OutlineInputBorder(
         borderSide: BorderSide(
             color: fieldErrorBorderColor ?? AppColor.textFiledErrorBorderColor),
-        borderRadius:
-            BorderRadius.circular(Dimensions.curverContainerRadius - 22)),
+        borderRadius: BorderRadius.circular(12)),
     focusedErrorBorder: OutlineInputBorder(
         borderSide: const BorderSide(color: Colors.red),
-        borderRadius:
-            BorderRadius.circular(Dimensions.curverContainerRadius - 22)),
+        borderRadius: BorderRadius.circular(12)),
   );
 }

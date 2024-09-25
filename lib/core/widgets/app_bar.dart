@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
 import '../resources/app_text_size.dart';
 import '../resources/colors.dart';
 import '../resources/dimensions.dart';
@@ -57,7 +58,7 @@ class CustmAppBar extends StatelessWidget {
               const SizedBox(
                 width: 15,
               ),
-              H2Text(
+              H1Text(
                   tittle: tittle,
                   tittleColor: AppColor.appTitleTextColor,
                   textSize: Responsive.isMobile(context)

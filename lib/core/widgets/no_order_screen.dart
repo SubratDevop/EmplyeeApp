@@ -1,8 +1,9 @@
 // ignore_for_file: must_be_immutable
+import 'package:employee_app/core/resources/app_text_size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../../../../../core/resources/app_text_size.dart';
+
 import '../../../../../../core/resources/colors.dart';
 import '../../../../../../core/resources/screen_size.dart';
 import '../../../../../../core/responsive/responsive_size.dart';
@@ -27,8 +28,7 @@ class NoOrderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return 
-    Expanded(
+    return Expanded(
       child: Container(
         width: double.infinity,
         color: const Color(0xFFEFFAFC),
@@ -52,13 +52,13 @@ class NoOrderWidget extends StatelessWidget {
                             ? 300
                             : 500,
               ),
-             
+
               SizedBox(
                 height: ScreenSize.width(context) <= 801 ? 15 : 25,
               ),
               tittle1 == ""
                   ? const SizedBox.shrink()
-                  : Body1Text(
+                  : H1Text(
                       alignnment: TextAlign.center,
                       tittle: tittle1 ?? "",
                       tittleColor: const Color(0xFF465558),
@@ -84,7 +84,7 @@ class NoOrderWidget extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 10),
-                          child: H3Text(
+                          child: H1Text(
                               tittle: tittle2!,
                               tittleColor: Colors.white,
                               textSize: 15),
@@ -114,7 +114,7 @@ class NoOrderWidget extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 10),
-                          child: H3Text(
+                          child: H1Text(
                               tittle: tittle3!,
                               tittleColor: const Color(0xFF1F5F7F),
                               textSize: 15),

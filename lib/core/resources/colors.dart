@@ -8,8 +8,8 @@ class AppColor {
 //* primary  Color
 
   //& Light theme
-  static Color primaryColor = const Color(0xff4EB5D7);
-
+  static Color primaryColor = const Color(0xff5151D6);
+  static Color curvedContainerColor = const Color(0xff3B3A99);
   static Color lightPrimary = AppColor.primaryColor;
   static const Color lightSecondary = Color(0xffE1E3E6);
   static const Color lightAccent = Color(0xffD5F1F8);

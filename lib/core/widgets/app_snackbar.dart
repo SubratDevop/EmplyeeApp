@@ -52,11 +52,11 @@ class CustomSnackbar {
     Get.snackbar(
       "-",
       "",
-      messageText: Body1Text(
+      messageText: H1Text(
         tittle: message,
         tittleColor: Colors.white.withOpacity(0.8),
       ),
-      titleText: Body1Text(
+      titleText: H1Text(
         tittle: tittle == Status.success
             ? "Success"
             : tittle == Status.warning
@@ -90,7 +90,7 @@ class CustomSnackbar {
       // style: ToastificationStyle.fillColored,
       autoCloseDuration: const Duration(seconds: 3),
       // you can also use RichText widget for title and description parameters
-      description: Body1Text(
+      description: H1Text(
         tittle: "Order has been created successfully",
         textSize: 14,
         tittleColor: Colors.white,

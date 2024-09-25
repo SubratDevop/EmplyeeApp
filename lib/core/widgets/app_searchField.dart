@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
+
 import '../resources/app_text_size.dart';
 import '../resources/colors.dart';
 import '../resources/dimensions.dart';
@@ -66,7 +67,7 @@ class SeachField1 extends StatelessWidget {
                 // ),
 
                 TextContainer(
-              textWidget: Body1Text(
+              textWidget: H1Text(
                 tittle: Strings.searchPatientHintText,
                 tittleColor: const Color(0xFF597173),
               ),

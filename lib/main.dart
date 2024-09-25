@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import 'core/bindings/bindings.dart';
 import 'core/resources/strings.dart';
-import 'core/routes/app_routes.dart';
 import 'core/widgets/app_status_bar.dart';
+import 'screens/home_screen/home_screen.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
@@ -42,9 +43,8 @@ class MyApp extends StatelessWidget {
           title: Strings.appName,
           initialBinding: ControllerBinding(),
           initialRoute: '/',
-          getPages: getPages,
-          // home: MyTabbedPage(),
-          // home: MyDropApp(),
+          // getPages: getPages,
+          home: const HomeScreen(),
         );
       },
     );

@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+
 import '../../resources/app_text_size.dart';
 import '../../resources/colors.dart';
 import '../../resources/screen_size.dart';
@@ -44,7 +45,7 @@ class SubmitButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: width ?? ScreenSize.width(context),
-        height: height ?? 45,
+        height: height ?? 54,
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColor.primaryColor,
           borderRadius: BorderRadius.circular(borderradius ?? 13),
@@ -61,11 +62,11 @@ class SubmitButton extends StatelessWidget {
           // gradient: btnGradient
         ),
         child: Center(
-          child: H3Text(
+          child: H1Text(
               tittle: tittle,
               textWeight: tittleWeightt ?? FontWeight.w600,
               tittleColor: textColor ?? AppColor.backgroundColor,
-              textSize: tittleTextSize),
+              textSize: tittleTextSize ?? AppTextSize.submitButtonTextsize),
         ),
       ),
     );

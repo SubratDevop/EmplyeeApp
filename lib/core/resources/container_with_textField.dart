@@ -26,7 +26,7 @@ class ContainerWithTextField extends StatelessWidget {
         decoration: InputDecoration(
             hintText: hintText ?? "0.0",
             hintStyle: GoogleFonts.outfit(
-              fontSize: AppTextSize.body1TextSize,
+              fontSize: AppTextSize.h1Textsize,
               fontWeight: FontWeight.w400,
               color: const Color(0xFF597173),
             ),
