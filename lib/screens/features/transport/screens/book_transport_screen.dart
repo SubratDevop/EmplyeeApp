@@ -53,7 +53,7 @@ class BookTrnsportScreen extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(
-                height: ScreenSize.height(context) / 2.5,
+                height: ScreenSize.height(context) / 4,
                 width: ScreenSize.width(context),
               ),
               Expanded(
@@ -232,16 +232,19 @@ class BookTrnsportScreen extends StatelessWidget {
                                             color: Colors.transparent,
                                           ),
                                           5.kW,
-                                          H2Text(
-                                            tittle: controller
-                                                .pickupController.text,
-                                            maxTextlines: 2,
-                                            // textWeight: FontWeight.w700,
-                                            textOverflow: TextOverflow.ellipsis,
-                                            textSize:
-                                                AppTextSize.h2Textsize - 3,
-                                            tittleColor:
-                                                const Color(0xFF516078),
+                                          Expanded(
+                                            child: H2Text(
+                                              tittle: controller
+                                                  .pickupController.text,
+                                              maxTextlines: 2,
+                                              // textWeight: FontWeight.w700,
+                                              textOverflow:
+                                                  TextOverflow.ellipsis,
+                                              textSize:
+                                                  AppTextSize.h2Textsize - 3,
+                                              tittleColor:
+                                                  const Color(0xFF516078),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -400,16 +403,19 @@ class BookTrnsportScreen extends StatelessWidget {
                                             color: Colors.transparent,
                                           ),
                                           5.kW,
-                                          H2Text(
-                                            tittle:
-                                                controller.dropController.text,
-                                            maxTextlines: 2,
-                                            // textWeight: FontWeight.w700,
-                                            textOverflow: TextOverflow.ellipsis,
-                                            textSize:
-                                                AppTextSize.h2Textsize - 3,
-                                            tittleColor:
-                                                const Color(0xFF516078),
+                                          Expanded(
+                                            child: H2Text(
+                                              tittle: controller
+                                                  .dropController.text,
+                                              maxTextlines: 2,
+                                              // textWeight: FontWeight.w700,
+                                              textOverflow:
+                                                  TextOverflow.ellipsis,
+                                              textSize:
+                                                  AppTextSize.h2Textsize - 3,
+                                              tittleColor:
+                                                  const Color(0xFF516078),
+                                            ),
                                           ),
                                         ],
                                       ),

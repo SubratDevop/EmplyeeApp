@@ -51,6 +51,7 @@ class NewGrievanceController extends GetxController {
       if (response.statusCode == 200) {
         GrievanceTypeModel data = GrievanceTypeModel.fromJson(response.data);
         grievanceTypes.value = data.data!;
+        selectedGrievanceId.value = grievanceTypes[0].lookupId.toString();
       }
     } on DioException catch (error) {
       CustomSnackbar.showSnackbar(Get.context!, '${error.message}',
@@ -82,14 +83,13 @@ class NewGrievanceController extends GetxController {
       );
     }
     selectOnSiteDate.value = DateFormat('dd-MM-yyyy HH:mm').format(date);
-    // log(selectOnSiteDate.value.replaceFirst(' ', 'T'));
   }
 
   selectingOnSiteDate() async {
     picked = await showDatePicker(
       context: Get.context!,
       initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
+      firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
     if (picked != null && picked != selectOnSiteDate.value) {

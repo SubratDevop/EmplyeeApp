@@ -1,8 +1,6 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/urls/app_urls.dart';
 import '../../../../core/utils/enums.dart';
 import '../../../../core/widgets/app_snackbar.dart';
@@ -23,7 +21,7 @@ class BedController extends GetxController {
     await getBedServiceCenterList("", "0");
   }
 
-  //^ select  Grievance Type
+  //^ select Bed Service center Type
 
   RxList<BedServiceCenterData> bedTypes = <BedServiceCenterData>[].obs;
   var selectBedServiceCenterName = "".obs;
@@ -45,6 +43,8 @@ class BedController extends GetxController {
       if (response.statusCode == 200) {
         final data = BedServiceCenterModel.fromJson(response.data);
         bedTypes.value = data.data!;
+        selectBedServiceCenterId.value = bedTypes[0].lookupId.toString();
+
       }
     } on DioException catch (error) {
       CustomSnackbar.showSnackbar(Get.context!, '${error.message}',
@@ -71,7 +71,6 @@ class BedController extends GetxController {
         BedServiceCenterListModel result =
             BedServiceCenterListModel.fromJson(response.data);
         bedList.value = result.bedMasterList!;
-        log(bedList[0].bedMasterId.toString());
       }
     } on DioException catch (error) {
       CustomSnackbar.showSnackbar(Get.context!, '${error.message}',

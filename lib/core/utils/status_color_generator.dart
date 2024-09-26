@@ -41,6 +41,14 @@ Color statusColorGenrator({required String status}) {
       break;
     case "Under Maintenance":
       statusColor = const Color(0xFFF14E63);
+    case "Routine":
+      statusColor = const Color(0xFFCCD8F9);
+    case "Emergency":
+      statusColor = const Color(0xFFF7D4D8);
+    case "RoutineText":
+      statusColor = const Color(0xFF22262F);
+    case "EmergencyText":
+      statusColor = const Color(0xFFD74761);
       break;
     default:
       statusColor = Colors.black;

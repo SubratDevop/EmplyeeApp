@@ -1,6 +1,8 @@
-// const localhost = "192.168.29.163";
+const localhost = "192.168.29.163";
 
-const localhost = "172.16.0.147"; //~ office
+// const localhost = "172.16.0.147"; //~ office
+
+// const localhost = "192.168.228.57"; //~ Divyesh
 
 abstract class UrlBuilder {
   static String baseURL = "http://$localhost:9959/erpapp/erp";
@@ -47,4 +49,15 @@ class Api {
     String? page = "",
   }) =>
       "${UrlBuilder.buildUrl(endPoint: "/fetchBedMaster")}?serviceCenter=$serviceCenter&page=$page";
+
+//* Referral
+  static String getreferralTypeURL() =>
+      UrlBuilder.buildUrl(endPoint: "/lookup?type=referral_priority");
+
+  static String referralListListURL({
+    String? employeeName = "",
+    String? departmentName = "",
+    String? referralPriority = "",
+  }) =>
+      "${UrlBuilder.buildUrl(endPoint: "/fetchReferrals")}?employeeName=$employeeName&departmentName=$departmentName&referralPriority=$referralPriority";
 }

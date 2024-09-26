@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../../../core/resources/colors.dart';
 import '../../../../core/resources/form_container_decoraion.dart';
 import '../../../../core/resources/screen_size.dart';
@@ -75,7 +76,7 @@ class NewGrevanceScreen extends StatelessWidget {
                         child: DropdownButton2(
                           isExpanded: true,
                           offset: const Offset(0, -15),
-                          hint: const Text("All"),
+                          // hint: const Text("All"),
                           value: controller.selectedGrievanceId.value == ""
                               ? null
                               : controller.selectedGrievanceId.value,
@@ -217,7 +218,6 @@ class NewGrevanceScreen extends StatelessWidget {
                           Expanded(
                             child: TextFormField(
                               controller: controller.pepoleController,
-                              keyboardType: TextInputType.number,
                               style: GoogleFonts.outfit(
                                 fontSize: 19,
                                 fontWeight: FontWeight.w400,

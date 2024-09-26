@@ -6,7 +6,7 @@ import '../../screens/common_screen/splash_screen/splash_screen.dart';
 import '../../screens/features/beds/screens/beds_screen.dart';
 import '../../screens/features/grievance/screens/grievance_screen.dart';
 import '../../screens/features/grievance/screens/new_grievance_screen.dart';
-import '../../screens/features/referral/referral_screen.dart';
+import '../../screens/features/referral/referral_tab_screen.dart';
 import '../../screens/features/transport/screens/book_transport_screen.dart';
 import '../../screens/features/transport/screens/transport_screen.dart';
 import '../../screens/home_screen/home_screen.dart';
@@ -59,13 +59,13 @@ final getPages = [
   //^ Grievance
   GetPage(
       name: AppPages.grievanceScreen,
-      page: () => GrievanceScreen(),
+      page: () => const GrievanceScreen(),
       transition: Transition.fade,
       transitionDuration: Dimensions.fadeDuration),
 
   GetPage(
       name: AppPages.newGrevanceScreen,
-      page: () => NewGrevanceScreen(),
+      page: () => const NewGrevanceScreen(),
       transition: Transition.fade,
       transitionDuration: Dimensions.fadeDuration),
 
@@ -79,7 +79,7 @@ final getPages = [
   //^ Referral
   GetPage(
       name: AppPages.referralScreen,
-      page: () => const ReferralScreen(),
+      page: () => const ReferralTabScreen(),
       transition: Transition.fade,
       transitionDuration: Dimensions.fadeDuration),
 

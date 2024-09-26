@@ -88,7 +88,7 @@ class TransportScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      convertGrievanecDateTime(
+                                      convertDateTime(
                                           dateTime: item.creationTimeStamp!),
                                       style: GoogleFonts.outfit(
                                           fontSize: 14,
@@ -129,16 +129,20 @@ class TransportScreen extends StatelessWidget {
                                           color: Colors.transparent,
                                         ),
                                         5.kW,
-                                        H2Text(
-                                          tittle: item.pickupLocation ?? "-",
-                                          maxTextlines: 2,
-                                          // textWeight: FontWeight.w400,
-                                          textOverflow: TextOverflow.ellipsis,
-                                          textSize: AppTextSize.h2Textsize - 4,
-                                          tittleColor: const Color(0xFF516078),
+                                        Expanded(
+                                          child: H2Text(
+                                            tittle: item.pickupLocation ?? "-",
+                                            maxTextlines: 2,
+                                            textOverflow: TextOverflow.ellipsis,
+                                            textSize:
+                                                AppTextSize.h2Textsize - 4,
+                                            tittleColor:
+                                                const Color(0xFF516078),
+                                          ),
                                         ),
                                       ],
                                     ),
+                                 
                                   ],
                                 ),
                                 //^ Drop Location
@@ -166,13 +170,17 @@ class TransportScreen extends StatelessWidget {
                                           color: Colors.transparent,
                                         ),
                                         5.kW,
-                                        H2Text(
-                                          tittle: item.dropLocation ?? "-",
-                                          maxTextlines: 2,
-                                          // textWeight: FontWeight.w400,
-                                          textOverflow: TextOverflow.ellipsis,
-                                          textSize: AppTextSize.h2Textsize - 4,
-                                          tittleColor: const Color(0xFF516078),
+                                        Expanded(
+                                          child: H2Text(
+                                            tittle: item.dropLocation ?? "-",
+                                            maxTextlines: 2,
+                                            // textWeight: FontWeight.w400,
+                                            textOverflow: TextOverflow.ellipsis,
+                                            textSize:
+                                                AppTextSize.h2Textsize - 4,
+                                            tittleColor:
+                                                const Color(0xFF516078),
+                                          ),
                                         ),
                                       ],
                                     ),

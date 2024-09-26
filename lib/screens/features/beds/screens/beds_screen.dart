@@ -114,7 +114,7 @@ class BedsScreen extends StatelessWidget {
                     child: DropdownButton2(
                       isExpanded: true,
                       offset: const Offset(0, -15),
-                      hint: const Text("All"),
+                      // hint: const Text("All"),
                       value: controller.selectBedServiceCenterId.value == ""
                           ? null
                           : controller.selectBedServiceCenterId.value,

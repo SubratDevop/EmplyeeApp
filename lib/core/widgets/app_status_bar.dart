@@ -5,8 +5,8 @@ class AppStatusBar {
   static splashStatusBarColor() {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: Colors.white,
+        statusBarIconBrightness: Brightness.light,
       ),
     );
   }

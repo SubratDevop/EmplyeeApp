@@ -1,6 +1,8 @@
 import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+
 import '../../../../core/urls/app_urls.dart';
 import '../../../../core/utils/enums.dart';
 import '../../../../core/widgets/app_snackbar.dart';
@@ -44,6 +46,7 @@ class GrievanceController extends GetxController {
       if (response.statusCode == 200) {
         final data = GrievanceTypeModel.fromJson(response.data);
         grievanceTypes.value = data.data!;
+        selectedGrievanceId.value = grievanceTypes[0].lookupId!.toString();
       }
     } on DioException catch (error) {
       CustomSnackbar.showSnackbar(Get.context!, '${error.message}',

@@ -70,7 +70,7 @@ class GrievanceScreen extends StatelessWidget {
                         child: DropdownButton2(
                           isExpanded: true,
                           offset: const Offset(0, -15),
-                          hint: const Text("All"),
+                          // hint: const Text("All"),
                           value: controller.selectedGrievanceId.value == ""
                               ? null
                               : controller.selectedGrievanceId.value,
@@ -145,7 +145,7 @@ class GrievanceScreen extends StatelessWidget {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                convertGrievanecDateTime(
+                                                convertDateTime(
                                                     dateTime: item
                                                         .creationTimeStamp!),
                                                 style: GoogleFonts.outfit(

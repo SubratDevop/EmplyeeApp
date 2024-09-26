@@ -13,16 +13,16 @@ import 'core/widgets/app_status_bar.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
-  
+
   runApp(
-    MyApp(),
+    // MyApp(),
 
     //^  with device Preview
 
-    // DevicePreview(
-    //   enabled: !kReleaseMode,
-    //   builder: (context) => const MyApp(), // Wrap your app
-    // ),
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const MyApp(), // Wrap your app
+    ),
   );
 }
 
@@ -44,10 +44,10 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: Strings.appName,
           initialBinding: ControllerBinding(),
+          getPages: getPages,
           // initialRoute: '/',
           initialRoute: '/HomeScreen',
-          getPages: getPages,
-          // home: const WrapExample(),
+          // home: const MyTabbedPage(),
         );
       },
     );
