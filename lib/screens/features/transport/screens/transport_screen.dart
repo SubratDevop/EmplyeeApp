@@ -9,6 +9,7 @@ import '../../../../core/resources/colors.dart';
 import '../../../../core/resources/screen_size.dart';
 import '../../../../core/utils/convert_grievanec_datetime.dart';
 import '../../../../core/utils/status_color_generator.dart';
+import '../../../../core/widgets/shimmer_list.dart';
 import '../controller/transport_controller.dart';
 
 class TransportScreen extends StatelessWidget {
@@ -16,46 +17,48 @@ class TransportScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<TranspostController>(
-        init: TranspostController(),
-        builder: (controller) {
-          return Scaffold(
-              backgroundColor: Colors.white,
-              appBar: AppBar(
-                backgroundColor: AppColor.curvedContainerColor,
-                toolbarHeight: 70,
-                leading: IconButton(
-                  onPressed: () => Get.back(),
-                  icon: SvgPicture.asset(
-                    'assets/icons/arrow-left.svg',
-                    height: 30,
-                    width: 30,
-                  ),
-                ),
-                actions: [
-                  IconButton(
-                      onPressed: () {
-                        controller.getTransportList();
-                      },
-                      icon: const Icon(
-                        Icons.refresh,
-                        color: Colors.white,
-                        size: 25,
-                      ))
-                ],
-                centerTitle: false,
-                title: Text(
-                  "Transport Service",
-                  style: GoogleFonts.outfit(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
-                      letterSpacing: 1),
-                ),
+    return GetBuilder<TransportController>(
+      init: TransportController(),
+      builder: (controller) {
+        return Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            backgroundColor: AppColor.curvedContainerColor,
+            toolbarHeight: 70,
+            leading: IconButton(
+              onPressed: () => Get.back(),
+              icon: SvgPicture.asset(
+                'assets/icons/arrow-left.svg',
+                height: 30,
+                width: 30,
               ),
-              body: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: controller.transportList.isEmpty
+            ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    controller.getTransportList();
+                  },
+                  icon: const Icon(
+                    Icons.refresh,
+                    color: Colors.white,
+                    size: 25,
+                  ))
+            ],
+            centerTitle: false,
+            title: Text(
+              "Transport Service",
+              style: GoogleFonts.outfit(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.white,
+                  letterSpacing: 1),
+            ),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: controller.loadingTransport.value == true
+                ? const ShimmerLIst()
+                : controller.transportList.isEmpty
                     ? const Center(
                         child: Text("No Data found"),
                       )
@@ -180,24 +183,25 @@ class TransportScreen extends StatelessWidget {
                           );
                         },
                       ),
-              ),
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.endFloat,
-              floatingActionButton: FloatingActionButton.extended(
-                backgroundColor: AppColor.primaryColor,
-                onPressed: () {
-                  Get.toNamed('/NewGrevanceScreen');
-                },
-                icon: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-                label: H3Text(
-                  tittle: "New Request",
-                  tittleColor: Colors.white,
-                  textSize: 18,
-                ),
-              ));
-        });
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+          floatingActionButton: FloatingActionButton.extended(
+            backgroundColor: AppColor.primaryColor,
+            onPressed: () {
+              Get.toNamed('/BookTrnsportScreen');
+            },
+            icon: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+            label: H3Text(
+              tittle: "New Request",
+              tittleColor: Colors.white,
+              textSize: 18,
+            ),
+          ),
+        );
+      },
+    );
   }
 }

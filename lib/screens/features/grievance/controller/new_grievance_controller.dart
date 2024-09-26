@@ -99,10 +99,11 @@ class NewGrievanceController extends GetxController {
 
 //^ save Grievance
 
-  RxBool savingGrievance = false.obs;
+  var savingGrievance = false.obs;
 
   saveGrivance() async {
     savingGrievance.value = true;
+    await Future.delayed(const Duration(seconds: 1));
 
     try {
       final headers = {

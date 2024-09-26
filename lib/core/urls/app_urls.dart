@@ -1,6 +1,6 @@
-const localhost = "192.168.29.163";
+// const localhost = "192.168.29.163";
 
-// const localhost = "172.16.0.147"; //~ office
+const localhost = "172.16.0.147"; //~ office
 
 abstract class UrlBuilder {
   static String baseURL = "http://$localhost:9959/erpapp/erp";
@@ -34,4 +34,17 @@ class Api {
           String? transportId = "",
           String? transportStatus = ""}) =>
       "${UrlBuilder.buildUrl(endPoint: "/fetchTransports")}?transportId=$transportId&employeeId=$employeeId&transportStatus=$transportStatus";
+
+  static String saveTransportURL() =>
+      UrlBuilder.buildUrl(endPoint: "/saveTransport");
+
+//* Bed
+  static String getBedServiceCenterURL() =>
+      UrlBuilder.buildUrl(endPoint: "/lookup?type=service_center");
+
+  static String bedServiceCenterListURL({
+    String? serviceCenter = "",
+    String? page = "",
+  }) =>
+      "${UrlBuilder.buildUrl(endPoint: "/fetchBedMaster")}?serviceCenter=$serviceCenter&page=$page";
 }

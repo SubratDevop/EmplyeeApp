@@ -1,4 +1,4 @@
-import 'package:employee_app/screens/features/beds/beds_screen.dart';
+import 'package:employee_app/screens/features/beds/screens/beds_screen.dart';
 import 'package:employee_app/screens/features/grievance/screens/grievance_screen.dart';
 import 'package:employee_app/screens/features/referral/referral_screen.dart';
 import 'package:employee_app/screens/features/transport/screens/transport_screen.dart';

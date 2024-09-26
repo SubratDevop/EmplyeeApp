@@ -9,7 +9,7 @@ import '../../../../core/utils/enums.dart';
 import '../../../../core/widgets/app_snackbar.dart';
 import '../model/transport_list_model.dart';
 
-class TranspostController extends GetxController {
+class TransportController extends GetxController {
   final dio = Dio();
 
   //* On init method
@@ -25,8 +25,10 @@ class TranspostController extends GetxController {
 
 //^ get Grievance
   RxList<TransportList> transportList = <TransportList>[].obs;
-
+  var loadingTransport = false.obs;
   Future getTransportList() async {
+    loadingTransport.value = true;
+    await Future.delayed(const Duration(seconds: 1));
     // transportList.value = [];
 
     // log(Api.getTransportURL(
@@ -50,6 +52,7 @@ class TranspostController extends GetxController {
     } catch (error) {
       Exception(error);
     }
+    loadingTransport.value = false;
     update();
   }
 }

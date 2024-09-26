@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
+
 import '../../screens/common_screen/login_screen/login_screen.dart';
 import '../../screens/common_screen/otp_screen/otp_screen.dart';
 import '../../screens/common_screen/splash_screen/splash_screen.dart';
-import '../../screens/features/beds/beds_screen.dart';
+import '../../screens/features/beds/screens/beds_screen.dart';
 import '../../screens/features/grievance/screens/grievance_screen.dart';
 import '../../screens/features/grievance/screens/new_grievance_screen.dart';
 import '../../screens/features/referral/referral_screen.dart';
+import '../../screens/features/transport/screens/book_transport_screen.dart';
 import '../../screens/features/transport/screens/transport_screen.dart';
 import '../../screens/home_screen/home_screen.dart';
 import '../resources/dimensions.dart';
@@ -28,6 +30,7 @@ class AppPages {
 
   //^ Transport
   static String transportScreen = '/TransportScreen';
+  static String bookTrnsportScreen = '/BookTrnsportScreen';
 }
 
 //~  pages are assiciated with GetX
@@ -62,7 +65,7 @@ final getPages = [
 
   GetPage(
       name: AppPages.newGrevanceScreen,
-      page: () =>  NewGrevanceScreen(),
+      page: () => NewGrevanceScreen(),
       transition: Transition.fade,
       transitionDuration: Dimensions.fadeDuration),
 
@@ -84,6 +87,11 @@ final getPages = [
   GetPage(
       name: AppPages.transportScreen,
       page: () => const TransportScreen(),
+      transition: Transition.fade,
+      transitionDuration: Dimensions.fadeDuration),
+  GetPage(
+      name: AppPages.bookTrnsportScreen,
+      page: () => const BookTrnsportScreen(),
       transition: Transition.fade,
       transitionDuration: Dimensions.fadeDuration),
 ];

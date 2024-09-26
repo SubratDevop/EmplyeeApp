@@ -1,9 +1,6 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-
 import '../../../../core/urls/app_urls.dart';
 import '../../../../core/utils/enums.dart';
 import '../../../../core/widgets/app_snackbar.dart';
@@ -55,13 +52,15 @@ class GrievanceController extends GetxController {
     update();
   }
 
-
-
 //^ get Grievance
   RxList<GrievanceList> grievanceList = <GrievanceList>[].obs;
+  var loadingGrivance = false.obs;
 
   Future getGrievanceList(String? grievanceId, String? grievanceType) async {
+    loadingGrivance.value = true;
+
     grievanceList.value = [];
+    await Future.delayed(const Duration(seconds: 1));
     try {
       final response = await dio.get(
         Api.getGrievanceURL(
@@ -76,6 +75,7 @@ class GrievanceController extends GetxController {
       CustomSnackbar.showSnackbar(Get.context!, '${error.message}',
           snackBartype: Status.failed);
     }
+    loadingGrivance.value = false;
     update();
   }
 }
