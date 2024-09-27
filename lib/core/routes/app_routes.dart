@@ -26,7 +26,7 @@ class AppPages {
   static String bedsScreen = '/BedsScreen';
 
   //^ Referral
-  static String referralScreen = '/ReferralScreen';
+  static String referralTabScreen = '/ReferralTabScreen';
 
   //^ Transport
   static String transportScreen = '/TransportScreen';
@@ -78,7 +78,7 @@ final getPages = [
 
   //^ Referral
   GetPage(
-      name: AppPages.referralScreen,
+      name: AppPages.referralTabScreen,
       page: () => const ReferralTabScreen(),
       transition: Transition.fade,
       transitionDuration: Dimensions.fadeDuration),

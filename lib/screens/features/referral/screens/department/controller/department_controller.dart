@@ -1,6 +1,8 @@
 import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+
 import '../../../../../../core/urls/app_urls.dart';
 import '../../../../../../core/utils/enums.dart';
 import '../../../../../../core/widgets/app_snackbar.dart';
@@ -20,6 +22,11 @@ class DepartmentController extends GetxController {
 
   getData() async {
     await getDepartmentTypeList();
+    getDepartmentList(
+      departmentName:
+          OtpScreen.employeeInfo!.departmentName, ////! fetch from Login details
+      referralPriority: selectedDepartmentName.value,
+    );
   }
 
   //^ select  Referral Type
@@ -31,8 +38,9 @@ class DepartmentController extends GetxController {
   void grievanceSelected(String value) {
     selectedDepartmentId.value = value;
     getDepartmentList(
-      departmentName: "ENT",
-      // departmentName: OtpScreen.employeeInfo!.departmentName, ////! fetch from Login details
+      // departmentName: "ENT",
+      departmentName:
+          OtpScreen.employeeInfo!.departmentName, ////! fetch from Login details
       referralPriority: selectedDepartmentName.value,
     );
     update();
@@ -48,7 +56,12 @@ class DepartmentController extends GetxController {
         final data = GrievanceTypeModel.fromJson(response.data);
         departmentTypes.value = data.data!;
         selectedDepartmentId.value = departmentTypes[0].lookupId!.toString();
-        getDepartmentList(referralPriority: selectedDepartmentName.value);
+        getDepartmentList(
+          // departmentName: "ENT",
+          departmentName: OtpScreen
+              .employeeInfo!.departmentName, ////! fetch from Login details
+          referralPriority: selectedDepartmentName.value,
+        );
       }
     } on DioException catch (error) {
       CustomSnackbar.showSnackbar(Get.context!, '${error.message}',
@@ -73,8 +86,8 @@ class DepartmentController extends GetxController {
       final response = await dio.get(
         Api.referralListListURL(
             employeeName: employeeName,
-            departmentName: "ENT",
-            // departmentName: OtpScreen.employeeInfo!.departmentName, ////! fetch from Login details
+            // departmentName: "ENT",
+            departmentName: departmentName, ////! fetch from Login details
             referralPriority: referralPriority),
       );
       log(response.statusCode.toString());

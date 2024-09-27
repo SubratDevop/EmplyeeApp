@@ -1,60 +1,67 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
+// import 'package:hawk_fab_menu/hawk_fab_menu.dart';
 
-import 'core/resources/colors.dart';
+// class MyHomePage1 extends StatefulWidget {
+//   const MyHomePage1({Key? key}) : super(key: key);
 
-class MyTabbedPage extends StatefulWidget {
-  const MyTabbedPage({super.key});
-  @override
-  State<MyTabbedPage> createState() => _MyTabbedPageState();
-}
+//   @override
+//   State<MyHomePage1> createState() => _MyHomePage1State();
+// }
 
-class _MyTabbedPageState extends State<MyTabbedPage>
-    with SingleTickerProviderStateMixin {
-  static const List<Tab> myTabs = <Tab>[
-    Tab(text: 'Request'),
-    Tab(text: 'My Referral'),
-    Tab(text: 'Department'),
-  ];
+// class _MyHomePage1State extends State<MyHomePage1> {
+//   HawkFabMenuController hawkFabMenuController = HawkFabMenuController();
 
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(vsync: this, length: myTabs.length);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColor.curvedContainerColor,
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: myTabs,
-          indicatorColor: const Color(0xFF5151D6),
-          overlayColor: MaterialStateProperty.all(
-              const Color(0xFF5151D6).withOpacity(0.5)),
-        ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: myTabs.map((Tab tab) {
-          final String label = tab.text!.toLowerCase();
-          return Center(
-            child: Text(
-              'This is the $label tab',
-              style: const TextStyle(fontSize: 36),
-            ),
-          );
-        }).toList(),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Hawk Fab Menu Demo'),
+//       ),
+//       body: HawkFabMenu(
+//         icon: AnimatedIcons.menu_arrow,
+//         fabColor: Colors.yellow,
+//         iconColor: Colors.green,
+//         hawkFabMenuController: hawkFabMenuController,
+//         items: [
+//           HawkFabMenuItem(
+//             label: 'Menu 1',
+//             ontap: () {
+//               ScaffoldMessenger.of(context).hideCurrentSnackBar();
+//               ScaffoldMessenger.of(context).showSnackBar(
+//                 const SnackBar(content: Text('Menu 1 selected')),
+//               );
+//             },
+//             icon: const Icon(Icons.home),
+//             color: Colors.red,
+//             labelColor: Colors.blue,
+//           ),
+//           HawkFabMenuItem(
+//             label: 'Menu 2',
+//             ontap: () {
+//               ScaffoldMessenger.of(context).hideCurrentSnackBar();
+//               ScaffoldMessenger.of(context).showSnackBar(
+//                 const SnackBar(content: Text('Menu 2 selected')),
+//               );
+//             },
+//             icon: const Icon(Icons.comment),
+//             labelColor: Colors.white,
+//             labelBackgroundColor: Colors.blue,
+//           ),
+//           HawkFabMenuItem(
+//             label: 'Menu 3 (default)',
+//             ontap: () {
+//               ScaffoldMessenger.of(context).hideCurrentSnackBar();
+//               ScaffoldMessenger.of(context).showSnackBar(
+//                 const SnackBar(content: Text('Menu 3 selected')),
+//               );
+//             },
+//             icon: const Icon(Icons.add_a_photo),
+//           ),
+//         ],
+//         body: const Center(
+//           child: Text('Center of the screen'),
+//         ),
+//       ),
+//     );
+//   }
+// }

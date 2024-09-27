@@ -1,6 +1,8 @@
 import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+
 import '../../../../core/urls/app_urls.dart';
 import '../../../../core/utils/enums.dart';
 import '../../../../core/widgets/app_snackbar.dart';
@@ -18,7 +20,7 @@ class BedController extends GetxController {
 
   getData() async {
     await getBedTypeList();
-    await getBedServiceCenterList("", "0");
+    getBedServiceCenterList(selectBedServiceCenterName.value, "0");
   }
 
   //^ select Bed Service center Type
@@ -30,7 +32,6 @@ class BedController extends GetxController {
   void servceSenterSelected(String value) {
     selectBedServiceCenterId.value = value;
     getBedServiceCenterList(selectBedServiceCenterName.value, "0");
-    log(selectBedServiceCenterName.value.toString());
     update();
   }
 
@@ -44,7 +45,6 @@ class BedController extends GetxController {
         final data = BedServiceCenterModel.fromJson(response.data);
         bedTypes.value = data.data!;
         selectBedServiceCenterId.value = bedTypes[0].lookupId.toString();
-
       }
     } on DioException catch (error) {
       CustomSnackbar.showSnackbar(Get.context!, '${error.message}',

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:employee_app/screens/common_screen/otp_screen/otp_screen.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/urls/app_urls.dart';
@@ -67,7 +68,9 @@ class GrievanceController extends GetxController {
     try {
       final response = await dio.get(
         Api.getGrievanceURL(
-            grievanceId: grievanceId, grievanceType: grievanceType),
+            grievanceId: grievanceId,
+            grievanceType: grievanceType,
+            employeeId: OtpScreen.employeeInfo!.employeeId.toString()),
       );
       log(response.statusCode.toString());
       if (response.statusCode == 200) {

@@ -10,6 +10,7 @@ import '../../../../core/handler/dio_handler.dart';
 import '../../../../core/urls/app_urls.dart';
 import '../../../../core/utils/enums.dart';
 import '../../../../core/widgets/app_snackbar.dart';
+import '../../../common_screen/otp_screen/otp_screen.dart';
 import '../../grievance/model/save_grievance_model.dart';
 import 'transport_controller.dart';
 
@@ -76,7 +77,7 @@ class BookTransportController extends GetxController {
 
   saveTransport() async {
     savingTransport.value = true;
-  await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     try {
       final headers = {
         "Content-Type": "application/json",
@@ -87,8 +88,10 @@ class BookTransportController extends GetxController {
         "dropLocation": dropController.text, // "456 Elm St, City, Country",
         "dateTime": selectOnSiteDate.value
             .replaceFirst(' ', 'T'), // "24-09-2023T15:30",
-        "employeeId": 1, // OtpScreen.employeeInfo!.employeeId,
-        "status": "Scheduled"
+        "employeeId": OtpScreen.employeeInfo!.employeeId, //1,
+        "status": "Scheduled",
+        "createdBy": OtpScreen.employeeInfo!.employeeId, // 1,
+        "updatedBy": OtpScreen.employeeInfo!.employeeId, //1
       };
 
       log(jsonEncode(data));

@@ -8,6 +8,8 @@ import '../screens/request/request_screen.dart';
 
 class ReferralTabController extends GetxController
     with GetSingleTickerProviderStateMixin {
+  RxBool isOrdered = false.obs;
+  RxBool isExtended = false.obs;
   List<Tab> referralTabs = <Tab>[
     Tab(
       child: referralTabText(tittle: "Request"),
@@ -39,6 +41,30 @@ class ReferralTabController extends GetxController
   void dispose() {
     tabController.dispose();
     super.dispose();
+  }
+
+  void getIsOrder() {
+    isOrdered.value = !isOrdered.value;
+  }
+
+  void getExtended() {
+    isExtended.value = !isExtended.value;
+  }
+
+  showOrderSnack() {
+    isOrdered.value == false
+        ? null
+        : Get.snackbar(
+            'Snackbar Title',
+            'Snackbar Message',
+
+            snackPosition:
+                SnackPosition.BOTTOM, // Set the position of the snackbar
+            backgroundColor: const Color.fromARGB(
+                255, 66, 66, 66), // Customize the background color
+            colorText:
+                const Color.fromARGB(255, 2, 2, 2), // Customize the text color
+          );
   }
 }
 

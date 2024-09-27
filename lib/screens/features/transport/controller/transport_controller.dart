@@ -1,12 +1,11 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/handler/dio_handler.dart';
 import '../../../../core/urls/app_urls.dart';
 import '../../../../core/utils/enums.dart';
 import '../../../../core/widgets/app_snackbar.dart';
+import '../../../common_screen/otp_screen/otp_screen.dart';
 import '../model/transport_list_model.dart';
 
 class TransportController extends GetxController {
@@ -31,14 +30,9 @@ class TransportController extends GetxController {
     await Future.delayed(const Duration(seconds: 1));
     // transportList.value = [];
 
-    // log(Api.getTransportURL(
-    //     employeeId: OtpScreen.employeeInfo!.employeeId.toString()));
     try {
-      final response = await dio.get(
-        Api.getTransportURL(
-            // employeeId: OtpScreen.employeeInfo!.employeeId.toString()),
-            employeeId: "1"),
-      );
+      final response = await dio.get(Api.getTransportURL(
+          employeeId: OtpScreen.employeeInfo!.employeeId.toString()));
       log(response.statusCode.toString());
       if (response.statusCode == 200) {
         TransportListModel result = TransportListModel.fromJson(response.data);

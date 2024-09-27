@@ -970,7 +970,7 @@ class DropdownButton2<T> extends StatefulWidget {
     // When adding new arguments, consider adding similar arguments to
     // DropdownButtonFormField.
   })  : assert(
-            items == null ||
+          items == null ||
               items.isEmpty ||
               value == null ||
               items.where((DropdownMenuItem<T> item) {

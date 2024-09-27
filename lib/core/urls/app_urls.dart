@@ -1,8 +1,9 @@
-const localhost = "192.168.29.163";
+// const localhost = "192.168.29.163";
 
-// const localhost = "172.16.0.147"; //~ office
+const localhost = "172.16.0.147"; //~ office
 
-// const localhost = "192.168.228.57"; //~ Divyesh
+// const localhost = "192.168.228.57"; //~  mobile Divyesh
+// const localhost = "172.16.0.168"; //~ Divyesh
 
 abstract class UrlBuilder {
   static String baseURL = "http://$localhost:9959/erpapp/erp";
@@ -27,8 +28,10 @@ class Api {
       UrlBuilder.buildUrl(endPoint: "/saveGrievance");
 
   static String getGrievanceURL(
-          {String? grievanceId = "", String? grievanceType = ""}) =>
-      "${UrlBuilder.buildUrl(endPoint: "/fetchGrievances")}?grievanceId=$grievanceId&grievanceType=$grievanceType";
+          {String? grievanceId = "",
+          String? grievanceType = "",
+          String? employeeId = ""}) =>
+      "${UrlBuilder.buildUrl(endPoint: "/fetchGrievances")}?grievanceId=$grievanceId&grievanceType=$grievanceType&employeeId=$employeeId";
 
 //* Transport
   static String getTransportURL(
@@ -43,6 +46,8 @@ class Api {
 //* Bed
   static String getBedServiceCenterURL() =>
       UrlBuilder.buildUrl(endPoint: "/lookup?type=service_center");
+  // static String getBedNoURL({required String serviceCenter}) =>
+  //     "${UrlBuilder.buildUrl(endPoint: "/fetchBedMaster")}?serviceCenter=$serviceCenter"; //! form service center
 
   static String bedServiceCenterListURL({
     String? serviceCenter = "",
@@ -53,11 +58,17 @@ class Api {
 //* Referral
   static String getreferralTypeURL() =>
       UrlBuilder.buildUrl(endPoint: "/lookup?type=referral_priority");
+  static String getReferralBedNoURL({required String serviceCenter}) =>
+      "${UrlBuilder.buildUrl(endPoint: "/fetchReferralsBeds")}?serviceCenter=$serviceCenter"; //! form service center
 
   static String referralListListURL({
+    String? employeeId = "",
     String? employeeName = "",
     String? departmentName = "",
     String? referralPriority = "",
   }) =>
-      "${UrlBuilder.buildUrl(endPoint: "/fetchReferrals")}?employeeName=$employeeName&departmentName=$departmentName&referralPriority=$referralPriority";
+      "${UrlBuilder.buildUrl(endPoint: "/fetchReferrals")}?employeeName=$employeeName&departmentName=$departmentName&referralPriority=$referralPriority&employeeId=$employeeId";
+
+  static String saveReferralURL() =>
+      UrlBuilder.buildUrl(endPoint: "/saveReferral");
 }

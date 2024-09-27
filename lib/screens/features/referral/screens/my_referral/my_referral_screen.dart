@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../../core/resources/app_text_size.dart';
 import '../../../../../core/resources/form_container_decoraion.dart';
 import '../../../../../core/resources/screen_size.dart';
@@ -28,7 +27,7 @@ class MyReferralScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //^ all Grievance Catagory
+                  //^ all referral type
                   Container(
                     height: 50,
                     padding: const EdgeInsets.symmetric(

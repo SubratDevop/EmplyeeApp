@@ -11,6 +11,7 @@ import '../../../../core/handler/dio_handler.dart';
 import '../../../../core/urls/app_urls.dart';
 import '../../../../core/utils/enums.dart';
 import '../../../../core/widgets/app_snackbar.dart';
+import '../../../common_screen/otp_screen/otp_screen.dart';
 import '../model/grievance_type_model.dart';
 import '../model/save_grievance_model.dart';
 
@@ -90,7 +91,7 @@ class NewGrievanceController extends GetxController {
       context: Get.context!,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
-      lastDate: DateTime(2101),
+      lastDate: DateTime.now(),
     );
     if (picked != null && picked != selectOnSiteDate.value) {
       selectFromDate(picked!);
@@ -112,13 +113,15 @@ class NewGrievanceController extends GetxController {
       var data = {
         // "grievanceId": int.parse(selectedGrievanceId.value), // 1,
         "issueDescription":
-            descriptionController.text, //"The product arrived damaged.",
+            descriptionController.text, // "The product arrived damaged.",
         "dateTimeOfIncident": selectOnSiteDate.value
             .replaceFirst(' ', 'T'), // "24-09-2023T15:30",
         "peopleInvolved": pepoleController.text, // "John Doe",
         "grievanceType": selectedGrievanceName.value, //"Damaged Goods",
         "status": "Submitted",
-        "isActive": true
+        "isActive": true,
+        "createdBy": OtpScreen.employeeInfo!.employeeId, // 1,
+        "updatedBy": OtpScreen.employeeInfo!.employeeId, //1
       };
 
       log(jsonEncode(data));
@@ -157,4 +160,6 @@ class NewGrievanceController extends GetxController {
     savingGrievance.value = false;
     update();
   }
+
+
 }

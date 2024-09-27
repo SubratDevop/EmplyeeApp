@@ -1,11 +1,10 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-
 import '../../../../../../core/urls/app_urls.dart';
 import '../../../../../../core/utils/enums.dart';
 import '../../../../../../core/widgets/app_snackbar.dart';
+import '../../../../../common_screen/otp_screen/otp_screen.dart';
 import '../../../../grievance/model/grievance_type_model.dart';
 import '../../request/model/referral_list_model.dart';
 
@@ -21,6 +20,11 @@ class MyMyReferralController extends GetxController {
 
   getData() async {
     await getMyReferralTypeList();
+    getMyReferralList(
+      referralPriority: selectedMyReferralName.value,
+      employeeName: OtpScreen.employeeInfo!.employeeName, //! Login details
+      //   employeeName: "subrat Rautaray",
+    );
   }
 
   //^ select  MyReferral Type
@@ -33,8 +37,8 @@ class MyMyReferralController extends GetxController {
     selectedMyReferralId.value = value;
     getMyReferralList(
       referralPriority: selectedMyReferralName.value,
-      // employeeName: OtpScreen.employeeInfo!.employeeName,   //! Login details
-      employeeName: "subrat Rautaray",
+      employeeName: OtpScreen.employeeInfo!.employeeName, //! Login details
+      //   employeeName: "subrat Rautaray",
     );
     update();
   }
@@ -73,8 +77,8 @@ class MyMyReferralController extends GetxController {
     try {
       final response = await dio.get(
         Api.referralListListURL(
-            // employeeName: OtpScreen.employeeInfo!.employeeName,   //! Login details
-            employeeName: "subrat Rautaray",
+            employeeName: employeeName, //! Login details
+            // employeeName: "subrat Rautaray",
             departmentName: "",
             referralPriority: referralPriority),
       );

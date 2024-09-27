@@ -1,6 +1,9 @@
 import 'dart:developer';
+
 import 'package:dio/dio.dart';
+import 'package:employee_app/screens/common_screen/otp_screen/otp_screen.dart';
 import 'package:get/get.dart';
+
 import '../../../../../../core/urls/app_urls.dart';
 import '../../../../../../core/utils/enums.dart';
 import '../../../../../../core/widgets/app_snackbar.dart';
@@ -19,6 +22,9 @@ class RequestController extends GetxController {
 
   getData() async {
     await getReferralTypeList();
+    getReferralList(
+        referralPriority: selectedReferralName.value,
+        employeeId: OtpScreen.employeeInfo!.employeeId.toString());
   }
 
   //^ select  Referral Type
@@ -29,7 +35,9 @@ class RequestController extends GetxController {
 
   void grievanceSelected(String value) {
     selectedReferralId.value = value;
-   getReferralList(referralPriority: selectedReferralName.value);
+    getReferralList(
+        referralPriority: selectedReferralName.value,
+        employeeId: OtpScreen.employeeInfo!.employeeId.toString());
     update();
   }
 
@@ -43,7 +51,9 @@ class RequestController extends GetxController {
         final data = GrievanceTypeModel.fromJson(response.data);
         referralTypes.value = data.data!;
         selectedReferralId.value = referralTypes[0].lookupId!.toString();
-        getReferralList(referralPriority: selectedReferralName.value);
+        getReferralList(
+            referralPriority: selectedReferralName.value,
+            employeeId: OtpScreen.employeeInfo!.employeeId.toString());
       }
     } on DioException catch (error) {
       CustomSnackbar.showSnackbar(Get.context!, '${error.message}',
@@ -52,13 +62,14 @@ class RequestController extends GetxController {
     update();
   }
 
-//^ get Grievance
+//^ get Referrral
   RxList<ReferralList> geReferralList = <ReferralList>[].obs;
   var loadingReferral = false.obs;
 
   Future getReferralList(
       {String? employeeName = "",
       String? departmentName = "",
+      String? employeeId = "",
       String? referralPriority = ""}) async {
     loadingReferral.value = true;
 
@@ -67,6 +78,7 @@ class RequestController extends GetxController {
     try {
       final response = await dio.get(
         Api.referralListListURL(
+            employeeId: employeeId,
             employeeName: employeeName,
             departmentName: departmentName,
             referralPriority: referralPriority),
