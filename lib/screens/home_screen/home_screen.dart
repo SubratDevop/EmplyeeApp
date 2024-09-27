@@ -258,11 +258,6 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: AppColor.primaryColor,
-          onPressed: () {
-            Get.toNamed('/referralTabScreen');
-          }),
     );
   }
 }

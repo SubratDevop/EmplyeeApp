@@ -161,25 +161,25 @@ class Department extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                            Container(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 6,
-                                                      vertical: 2),
-                                              decoration: BoxDecoration(
-                                                  color:
-                                                      const Color(0xFF5151D6),
-                                                  borderRadius:
-                                                      BorderRadius.circular(4)),
-                                              child: Text(
-                                                "Accept",
-                                                style: GoogleFonts.outfit(
-                                                    fontSize: 12,
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ),
+                                            // Container(
+                                            //   padding:
+                                            //       const EdgeInsets.symmetric(
+                                            //           horizontal: 6,
+                                            //           vertical: 2),
+                                            //   decoration: BoxDecoration(
+                                            //       color:
+                                            //           const Color(0xFF5151D6),
+                                            //       borderRadius:
+                                            //           BorderRadius.circular(4)),
+                                            //   child: Text(
+                                            //     "Accept",
+                                            //     style: GoogleFonts.outfit(
+                                            //         fontSize: 12,
+                                            //         color: Colors.white,
+                                            //         fontWeight:
+                                            //             FontWeight.w500),
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
                                         05.kH,

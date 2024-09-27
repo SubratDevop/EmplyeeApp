@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../core/resources/app_text_size.dart';
-import '../../../../../core/resources/colors.dart';
 import '../../../../../core/resources/form_container_decoraion.dart';
 import '../../../../../core/resources/screen_size.dart';
 import '../../../../../core/utils/convert_grievanec_datetime.dart';
@@ -78,8 +77,6 @@ class RequestScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  13.kH,
-
                   Expanded(
                     child: controller.loadingReferral.value == true
                         ? const ShimmerLIst()
@@ -165,13 +162,14 @@ class RequestScreen extends StatelessWidget {
                                               ],
                                             ),
                                             Text(
-                                              item.bedStatus ?? "",
+                                              item.referralStatus ?? "",
                                               style: GoogleFonts.outfit(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w400,
                                                   color: statusColorGenrator(
-                                                      status: item.bedStatus ??
-                                                          "")),
+                                                      status:
+                                                          item.referralStatus ??
+                                                              "")),
                                             )
                                           ],
                                         ),
@@ -257,6 +255,4 @@ class RequestScreen extends StatelessWidget {
           );
         });
   }
-
-
 }

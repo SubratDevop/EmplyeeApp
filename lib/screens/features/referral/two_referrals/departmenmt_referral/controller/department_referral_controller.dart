@@ -14,12 +14,15 @@ import '../../../../../../core/widgets/app_snackbar.dart';
 import '../../../../beds/model/bed_service_center_model.dart';
 import '../../../../grievance/model/grievance_type_model.dart';
 import '../../../../grievance/model/save_grievance_model.dart';
+import '../../../referral_tab_screen.dart';
+import '../../../screens/request/controller/request_controller.dart';
 import '../model/bed_no_model.dart';
 
 class DepartmentReferralController extends GetxController {
   final dio = Dio();
   final phrnController = TextEditingController();
   final remarkController = TextEditingController();
+  final doctorNameController = TextEditingController();
   final patientNameController = TextEditingController();
   final bedNoController = TextEditingController();
 
@@ -178,7 +181,8 @@ class DepartmentReferralController extends GetxController {
       };
       var data = {
         "referralType": "Department Referral",
-        "consultantName": "", // " " in case of Consultant
+        "consultantName":
+            doctorNameController.text, // " " in case of Consultant
         "departmentName": selectDepartmentTypeName
             .value, //"Cardiology", // " " in case of department
         "patientMrno": phrnController.text, // "MRNO39308949",
@@ -209,12 +213,21 @@ class DepartmentReferralController extends GetxController {
         var result = SaveGrievanceModel.fromJson(response.data);
 
         if (result.status == true) {
-          await Future.delayed(const Duration(seconds: 3));
-          Get.offAllNamed('/referralTabScreen', predicate: (route) {
-            return route.settings.name == '/HomeScreen';
-          }); //! Tab controller index(1)
+          await Future.delayed(const Duration(seconds: 2));
+
+          Get.offAll(
+            const ReferralTabScreen(), // The screen you want to navigate to
+            predicate: (route) {
+              return route.settings.name == '/HomeScreen';
+            },
+          );
+          final requestController = Get.put(RequestController());
+
+          requestController.geReferralList();
+          // Get.back();
           CustomSnackbar.showSnackbar(Get.context!, result.message!,
               snackBartype: Status.success);
+          update();
         } else {
           CustomSnackbar.showSnackbar(Get.context!,
               'Failed to send OTP with error code : ${response.statusCode}',

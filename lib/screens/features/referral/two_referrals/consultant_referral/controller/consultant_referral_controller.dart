@@ -14,6 +14,8 @@ import '../../../../../../core/widgets/app_snackbar.dart';
 import '../../../../beds/model/bed_service_center_model.dart';
 import '../../../../grievance/model/grievance_type_model.dart';
 import '../../../../grievance/model/save_grievance_model.dart';
+import '../../../referral_tab_screen.dart';
+import '../../../screens/request/controller/request_controller.dart';
 import '../../departmenmt_referral/model/bed_no_model.dart';
 
 class ConsultantReferralController extends GetxController {
@@ -181,7 +183,8 @@ class ConsultantReferralController extends GetxController {
         "referralType": "Consultant Referral",
         "consultantName":
             doctorNameController.text, // " " in case of Consultant
-        "departmentName": "", //"Cardiology", // " " in case of department
+        "departmentName": selectDepartmentTypeName
+            .value, //"Cardiology", // " " in case of department
         "patientMrno": phrnController.text, // "MRNO39308949",
         "patientName": patientNameController.text, // "Smita Dey",
         "bedNo": selectBedNo.value, // "B001",
@@ -210,10 +213,16 @@ class ConsultantReferralController extends GetxController {
         var result = SaveGrievanceModel.fromJson(response.data);
 
         if (result.status == true) {
-          await Future.delayed(const Duration(seconds: 3));
-          Get.offAllNamed('/referralTabScreen', predicate: (route) {
-            return route.settings.name == '/HomeScreen';
-          }); //! Tab controller index(1)
+          await Future.delayed(const Duration(seconds: 2));
+          Get.offAll(
+            const ReferralTabScreen(), // The screen you want to navigate to
+            predicate: (route) {
+              return route.settings.name == '/HomeScreen';
+            },
+          );
+          final requestController = Get.put(RequestController());
+
+          requestController.geReferralList(); //! Tab controller index(1)
           CustomSnackbar.showSnackbar(Get.context!, result.message!,
               snackBartype: Status.success);
         } else {

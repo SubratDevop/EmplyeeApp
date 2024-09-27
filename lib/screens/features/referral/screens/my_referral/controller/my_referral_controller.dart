@@ -1,6 +1,8 @@
 import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+
 import '../../../../../../core/urls/app_urls.dart';
 import '../../../../../../core/utils/enums.dart';
 import '../../../../../../core/widgets/app_snackbar.dart';
@@ -77,9 +79,8 @@ class MyMyReferralController extends GetxController {
     try {
       final response = await dio.get(
         Api.referralListListURL(
-            employeeName: employeeName, //! Login details
-            // employeeName: "subrat Rautaray",
-            departmentName: "",
+            // employeeName: employeeName,
+            employeeName: OtpScreen.employeeInfo!.employeeName,
             referralPriority: referralPriority),
       );
       log(response.statusCode.toString());

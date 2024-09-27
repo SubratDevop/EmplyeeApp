@@ -6,6 +6,12 @@ Color statusColorGenrator({required String status}) {
     case "Submitted":
       statusColor = Colors.green;
       break;
+    case "Pending":
+      statusColor = Colors.orange;
+      break;
+    case "Accepted":
+      statusColor = Colors.green;
+      break;
     case "In Progress":
       statusColor = Colors.orange;
       break;
