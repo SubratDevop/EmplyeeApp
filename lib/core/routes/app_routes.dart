@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../../screens/common_screen/login_screen/login_screen.dart';
 import '../../screens/common_screen/otp_screen/otp_screen.dart';
 import '../../screens/common_screen/splash_screen/splash_screen.dart';
+import '../../screens/features/beds/screens/bed_acton_screen.dart';
 import '../../screens/features/beds/screens/beds_screen.dart';
 import '../../screens/features/grievance/screens/grievance_screen.dart';
 import '../../screens/features/grievance/screens/new_grievance_screen.dart';
@@ -24,6 +25,7 @@ class AppPages {
 
   //^ Beds
   static String bedsScreen = '/BedsScreen';
+  static String bedActionScreen = '/BedActionScreen';
 
   //^ Referral
   static String referralTabScreen = '/ReferralTabScreen';
@@ -73,6 +75,11 @@ final getPages = [
   GetPage(
       name: AppPages.bedsScreen,
       page: () => const BedsScreen(),
+      transition: Transition.fade,
+      transitionDuration: Dimensions.fadeDuration),
+  GetPage(
+      name: AppPages.bedActionScreen,
+      page: () => const BedActionScreen(),
       transition: Transition.fade,
       transitionDuration: Dimensions.fadeDuration),
 

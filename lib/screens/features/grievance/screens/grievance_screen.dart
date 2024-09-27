@@ -55,9 +55,7 @@ class GrievanceScreen extends StatelessWidget {
                       letterSpacing: 1),
                 ),
               ),
-             
-              body:
-               Padding(
+              body: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +128,7 @@ class GrievanceScreen extends StatelessWidget {
                                   itemBuilder: (context, index) {
                                     var item = controller.grievanceList[index];
                                     return Container(
-                                      height: 125,
+                                      // height: 125,
                                       width: ScreenSize.width(context),
                                       padding: const EdgeInsets.all(12),
                                       decoration: BoxDecoration(
@@ -148,8 +146,9 @@ class GrievanceScreen extends StatelessWidget {
                                             children: [
                                               Text(
                                                 convertDateTime(
-                                                    dateTime: item
-                                                        .creationTimeStamp!),
+                                                    dateTime:
+                                                        item.dateTimeOfIncident ??
+                                                            "-"),
                                                 style: GoogleFonts.outfit(
                                                     fontSize: 14,
                                                     fontWeight: FontWeight.w400,

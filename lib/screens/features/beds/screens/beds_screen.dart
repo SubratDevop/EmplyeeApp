@@ -2,6 +2,7 @@ import 'package:employee_app/core/extesnions/sizedbox.dart';
 import 'package:employee_app/core/utils/status_color_generator.dart';
 import 'package:employee_app/core/widgets/shimmer_list.dart';
 import 'package:employee_app/screens/features/beds/controller/bed_controller.dart';
+import 'package:employee_app/screens/features/beds/model/bed_service_center_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,8 @@ import '../widget/bed_stattus_widget.dart';
 
 class BedsScreen extends StatelessWidget {
   const BedsScreen({super.key});
+
+  static BedMasterList? selectedBedInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +83,7 @@ class BedsScreen extends StatelessWidget {
                   ],
                 ),
                 10.kH,
+
                 Row(
                   children: [
                     SizedBox(
@@ -98,7 +102,20 @@ class BedsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                10.kH,
+                Row(
+                  children: [
+                    SizedBox(
+                      // width: 100,
+                      child: besStatusWidget(
+                        tittle: 'Marked for Discharge',
+                        statusColor: const Color(0xFF9F57D7),
+                      ),
+                    ),
+                  ],
+                ),
                 1.kH,
+
                 const Divider(
                   color: Color(0xFFD5DAE2),
                   thickness: 1.5,
@@ -153,7 +170,7 @@ class BedsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                15.kH,
+                30.kH,
                 controller.loadingBeds.value == true
                     ? const BedShimmerLIst()
                     : controller.bedList.isEmpty
@@ -174,27 +191,34 @@ class BedsScreen extends StatelessWidget {
                                     mainAxisSpacing: 14),
                             itemBuilder: (_, index) {
                               var item = controller.bedList[index];
-                              return Column(
-                                children: [
-                                  SizedBox(
-                                    height: 50,
-                                    width: 50,
-                                    child: Image.asset(
-                                      "assets/icons/beds.png",
-                                      // fit: BoxFit.cover,
-                                      color: statusColorGenrator(
-                                          status: item.bedStatus!),
+                              return InkWell(
+                                onTap: () {
+                                  BedsScreen.selectedBedInfo = item;
+
+                                  Get.toNamed('/BedActionScreen');
+                                },
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 50,
+                                      width: 50,
+                                      child: Image.asset(
+                                        "assets/icons/beds.png",
+                                        // fit: BoxFit.cover,
+                                        color: statusColorGenrator(
+                                            status: item.bedStatus!),
+                                      ),
                                     ),
-                                  ),
-                                  04.kH,
-                                  Text(
-                                    item.bedNo ?? "-",
-                                    style: GoogleFonts.outfit(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                        color: const Color(0xFF3A4352)),
-                                  )
-                                ],
+                                    04.kH,
+                                    Text(
+                                      item.bedNo ?? "-",
+                                      style: GoogleFonts.outfit(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: const Color(0xFF3A4352)),
+                                    )
+                                  ],
+                                ),
                               );
                             },
                           ),

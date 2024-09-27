@@ -1,22 +1,24 @@
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:dio/dio.dart';
-import 'package:employee_app/screens/common_screen/otp_screen/otp_screen.dart';
+import 'package:employee_app/screens/features/beds/controller/bed_controller.dart';
+import 'package:employee_app/screens/features/beds/screens/beds_screen.dart';
+import 'package:employee_app/screens/features/referral/two_referrals/departmenmt_referral/model/bed_no_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../../../../../../core/handler/dio_handler.dart';
+
 import '../../../../../../core/urls/app_urls.dart';
 import '../../../../../../core/utils/enums.dart';
 import '../../../../../../core/widgets/app_snackbar.dart';
-import '../../../../beds/model/bed_service_center_model.dart';
-import '../../../../grievance/model/grievance_type_model.dart';
-import '../../../../grievance/model/save_grievance_model.dart';
-import '../../../referral_tab_screen.dart';
-import '../../../screens/request/controller/request_controller.dart';
-import '../model/bed_no_model.dart';
+import '../../../../core/handler/dio_handler.dart';
+import '../../../common_screen/otp_screen/otp_screen.dart';
+import '../../grievance/model/save_grievance_model.dart';
+import '../model/bed_service_center_model.dart';
+import '../model/mark_bed_model.dart';
 
-class DepartmentReferralController extends GetxController {
+class BedActionController extends GetxController {
   final dio = Dio();
   final phrnController = TextEditingController();
   final remarkController = TextEditingController();
@@ -33,7 +35,7 @@ class DepartmentReferralController extends GetxController {
 
   getData() async {
     await getDepatrtmentTypeList();
-    await getPriorityTypeList();
+    await getMarkBedList();
   }
 
   //^ select  Service center Type
@@ -98,27 +100,29 @@ class DepartmentReferralController extends GetxController {
     update();
   }
 
-  //^ select  Priority Type
+  //^ select  Mark Bed Type
 
-  RxList<GrievanceData> priorityTypes = <GrievanceData>[].obs;
-  var selectedPriorityName = "".obs;
-  var selectedPriorityId = "".obs;
+  RxList<MarkBedList> markBedTypes = <MarkBedList>[].obs;
+  var selectedmarkBedName = "".obs;
+  var selectedmarkBedId = "".obs;
 
-  void prioritySelected(String value) {
-    selectedPriorityId.value = value;
+  void markBedSelected(String value) {
+    selectedmarkBedId.value = value;
     update();
   }
 
-  Future getPriorityTypeList() async {
+  Future getMarkBedList() async {
     try {
       final response = await dio.get(
-        Api.getreferralTypeURL(), //! same for all type sof referrals
+        Api.getMarkBedURL(
+            bedStatus: BedsScreen.selectedBedInfo!
+                .bedStatus!), //! same for all type sof referrals
       );
       log(response.statusCode.toString());
       if (response.statusCode == 200) {
-        final data = GrievanceTypeModel.fromJson(response.data);
-        priorityTypes.value = data.data!;
-        selectedPriorityId.value = priorityTypes[0].lookupId!.toString();
+        final data = MarkBedModel.fromJson(response.data);
+        markBedTypes.value = data.data!;
+        selectedmarkBedId.value = markBedTypes[0].id!.toString();
       }
     } on DioException catch (error) {
       CustomSnackbar.showSnackbar(Get.context!, '${error.message}',
@@ -165,12 +169,12 @@ class DepartmentReferralController extends GetxController {
     }
   }
 
-//^ save department Referral
+//^ save Bed Action
 
-  var savingDepartmentReferral = false.obs;
+  var savingBedAction = false.obs;
 
-  saveDepartmentReferral() async {
-    savingDepartmentReferral.value = true;
+  saveBed() async {
+    savingBedAction.value = true;
     await Future.delayed(const Duration(seconds: 1));
 
     try {
@@ -178,29 +182,26 @@ class DepartmentReferralController extends GetxController {
         "Content-Type": "application/json",
       };
       var data = {
-        "referralType": "Department Referral",
-        "consultantName":
-            doctorNameController.text, // " " in case of Consultant
-        "departmentName": selectDepartmentTypeName
-            .value, //"Cardiology", // " " in case of department
-        "patientMrno": phrnController.text, // "MRNO39308949",
-        "patientName": patientNameController.text, // "Smita Dey",
-        "bedNo": selectBedNo.value, // "B001",
-        "referralPriority": selectedPriorityName.value, // "Emergency",
-        "remarks": remarkController
-            .text, // "Urgent case, requires immediate attention",
-        "referralDateTime": selectOnSiteDate.value
-            .replaceFirst(' ', 'T'), // "27-09-2024T10:30",
-        "isActive": true,
-        "referralStatus": "Pending",
-        "bedId": int.parse(selectBedNoId.value), // 1,
-        "bedStatus": "Blocked",
+        "bedMasterId": BedsScreen.selectedBedInfo!.bedMasterId!, // 1,
+        "bedNo": BedsScreen.selectedBedInfo!.bedNo, // "B001",
+        "bedType": BedsScreen.selectedBedInfo!.bedType, // "General Bed",
+        "serviceCenter":
+            BedsScreen.selectedBedInfo!.serviceCenter!, // "Emergency",
+        "bedStatus":
+            selectedmarkBedName.value, // "Blocked", // pass by drop down
+        "patientMrno": phrnController.text, // "MRN421839",
+        "patientName": patientNameController.text, // "Shivam Jha",
+        "doctorName": doctorNameController.text, //"Hemant kumar",
+        "eventDateTime": selectOnSiteDate.value
+            .replaceFirst(' ', 'T'), // "25-09-2023T15:30",
+        "remarks": remarkController.text, // "this is remakrs",
+        "isActiveBedMaster": true,
         "createdBy": OtpScreen.employeeInfo!.employeeId, // 1,
         "updatedBy": OtpScreen.employeeInfo!.employeeId // 1
       };
 
       log(jsonEncode(data));
-      final response = await dio.post(Api.saveReferralURL(),
+      final response = await dio.post(Api.saveBedURL(),
           data: data,
           options: Options(
             headers: headers,
@@ -214,14 +215,14 @@ class DepartmentReferralController extends GetxController {
           await Future.delayed(const Duration(seconds: 2));
 
           Get.offAll(
-            const ReferralTabScreen(), // The screen you want to navigate to
+            const BedsScreen(), // The screen you want to navigate to
             predicate: (route) {
               return route.settings.name == '/HomeScreen';
             },
           );
-          final requestController = Get.put(RequestController());
+          final requestController = Get.put(BedController());
 
-          requestController.geReferralList();
+          requestController.bedList();
           // Get.back();
           CustomSnackbar.showSnackbar(Get.context!, result.message!,
               snackBartype: Status.success);
@@ -240,7 +241,7 @@ class DepartmentReferralController extends GetxController {
     } catch (error) {
       Exception(error);
     }
-    savingDepartmentReferral.value = false;
+    savingBedAction.value = false;
     update();
   }
 }

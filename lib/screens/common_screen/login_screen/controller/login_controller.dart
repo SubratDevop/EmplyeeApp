@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/handler/dio_handler.dart';
@@ -13,6 +14,17 @@ class LoginController extends GetxController {
   final numberController = TextEditingController();
   final dio = Dio();
   var generatingOTP = false.obs;
+
+  @override
+  void onInit() async {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      // statusBarColor: AppColor.primaryColor, // Set the status bar color here
+      statusBarColor: Color(0xFF7CB5EB), // Set the status bar color here
+      statusBarIconBrightness: Brightness.dark, // Set text and icons color
+    ));
+
+    super.onInit();
+  }
 
   generateOtp() async {
     generatingOTP.value = true;

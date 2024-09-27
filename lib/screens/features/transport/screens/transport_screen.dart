@@ -89,7 +89,7 @@ class TransportScreen extends StatelessWidget {
                                   children: [
                                     Text(
                                       convertDateTime(
-                                          dateTime: item.creationTimeStamp!),
+                                          dateTime: item.dateTime ?? "-"),
                                       style: GoogleFonts.outfit(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w400,
@@ -142,7 +142,6 @@ class TransportScreen extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                 
                                   ],
                                 ),
                                 //^ Drop Location

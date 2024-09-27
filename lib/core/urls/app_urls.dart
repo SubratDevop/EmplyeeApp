@@ -1,12 +1,15 @@
 // const localhost = "192.168.29.163";
 
 // const localhost = "172.16.0.147"; //~ office
+const localhost = "52.66.254.50"; //~ deploy
 
 // const localhost = "192.168.228.57"; //~  mobile Divyesh
-const localhost = "172.16.0.168"; //~ Divyesh
+// const localhost = "192.168.202.198"; //~  mobile Subrat
+// const localhost = "172.16.0.168"; //~ Divyesh
 
 abstract class UrlBuilder {
-  static String baseURL = "http://$localhost:9959/erpapp/erp";
+  // static String baseURL = "http://$localhost:9959/erpapp/erp";
+  static String baseURL = "http://$localhost:7172/erpapp/erp"; //~ deploy
 
   static String buildUrl({required String endPoint}) => "$baseURL$endPoint";
 }
@@ -54,6 +57,13 @@ class Api {
     String? page = "",
   }) =>
       "${UrlBuilder.buildUrl(endPoint: "/fetchBedMaster")}?serviceCenter=$serviceCenter&page=$page";
+
+  static String getMarkBedURL({required String bedStatus}) =>
+      UrlBuilder.buildUrl(
+          endPoint: "/fetchBedFilterStatus?bedStatus=$bedStatus");
+
+  static String saveBedURL() =>
+      UrlBuilder.buildUrl(endPoint: "/saveBedTransaction");
 
 //* Referral
   static String getreferralTypeURL() =>

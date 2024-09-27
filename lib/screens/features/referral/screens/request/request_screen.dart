@@ -77,6 +77,7 @@ class RequestScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  13.kH,
                   Expanded(
                     child: controller.loadingReferral.value == true
                         ? const ShimmerLIst()
@@ -94,7 +95,7 @@ class RequestScreen extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   var item = controller.geReferralList[index];
                                   return Container(
-                                    height: 125,
+                                    // height: 125,
                                     width: ScreenSize.width(context),
                                     padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(

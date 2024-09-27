@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
 import 'core/bindings/bindings.dart';
 import 'core/resources/strings.dart';
 import 'core/routes/app_routes.dart';
@@ -13,14 +14,14 @@ Future<void> main() async {
   await dotenv.load(fileName: ".env");
 
   runApp(
-    // MyApp(),
+    const MyApp(),
 
     //^  with device Preview
 
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => const MyApp(), // Wrap your app
-    ),
+    // DevicePreview(
+    //   enabled: !kReleaseMode,
+    //   builder: (context) => const MyApp(), // Wrap your app
+    // ),
   );
 }
 
