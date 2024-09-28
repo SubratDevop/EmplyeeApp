@@ -17,7 +17,8 @@ class ShimmerLIst extends StatelessWidget {
       itemCount: 50,
       itemBuilder: (context, index) {
         // var h2text = H2Text;
-        return Padding(
+        return 
+        Padding(
           padding: const EdgeInsets.all(8.0),
           child: Shimmer.fromColors(
               baseColor: Colors.grey[300]!,
@@ -59,6 +60,7 @@ class ShimmerLIst extends StatelessWidget {
                 ),
               )),
         );
+     
       },
     );
   }

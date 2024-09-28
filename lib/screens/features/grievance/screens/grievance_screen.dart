@@ -1,11 +1,11 @@
 import 'package:employee_app/core/extesnions/sizedbox.dart';
 import 'package:employee_app/core/resources/app_text_size.dart';
-import 'package:employee_app/core/widgets/shimmer_list.dart';
 import 'package:employee_app/screens/features/grievance/controller/grievance_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/resources/colors.dart';
 import '../../../../core/resources/form_container_decoraion.dart';
@@ -111,14 +111,61 @@ class GrievanceScreen extends StatelessWidget {
                     ),
                     13.kH,
 
-                    Expanded(
-                      child: controller.loadingGrivance.value == true
-                          ? const ShimmerLIst()
-                          : controller.grievanceList.isEmpty
-                              ? const Center(
-                                  child: Text("No Data found"),
-                                )
-                              : ListView.separated(
+                    controller.loadingGrivance.value == true
+                        // ? const ShimmerLIst()
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Shimmer.fromColors(
+                                baseColor: Colors.grey[300]!,
+                                highlightColor: Colors.grey[100]!,
+                                child: Container(
+                                  width: ScreenSize.width(context),
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFECEEF2)
+                                        .withOpacity(0.6),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        height: 15,
+                                        width: 100,
+                                        decoration: BoxDecoration(
+                                            color: Colors.green,
+                                            borderRadius:
+                                                BorderRadius.circular(05)),
+                                      ),
+                                      10.kH,
+                                      Container(
+                                        height: 20,
+                                        width: 200,
+                                        decoration: BoxDecoration(
+                                            color: Colors.green,
+                                            borderRadius:
+                                                BorderRadius.circular(05)),
+                                      ),
+                                      10.kH,
+                                      Container(
+                                        height: 40,
+                                        width: 300,
+                                        decoration: BoxDecoration(
+                                            color: Colors.green,
+                                            borderRadius:
+                                                BorderRadius.circular(05)),
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          )
+                        : controller.grievanceList.isEmpty
+                            ? const Center(
+                                child: Text("No Data found"),
+                              )
+                            : Expanded(
+                                child: ListView.separated(
                                   padding: EdgeInsets.zero,
                                   separatorBuilder: (_, __) => const Divider(
                                     height: 12,
@@ -140,11 +187,12 @@ class GrievanceScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Row(
+                                          Row( 
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
+                                                // "item.dateTimeOfIncident"
                                                 convertDateTime(
                                                     dateTime:
                                                         item.dateTimeOfIncident ??
@@ -186,7 +234,7 @@ class GrievanceScreen extends StatelessWidget {
                                     );
                                   },
                                 ),
-                    ),
+                              ),
                   ],
                 ),
               ),

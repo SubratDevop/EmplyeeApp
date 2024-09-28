@@ -62,7 +62,7 @@ class GrievanceController extends GetxController {
 
   Future getGrievanceList(String? grievanceId, String? grievanceType) async {
     loadingGrivance.value = true;
-
+    log(OtpScreen.employeeInfo!.employeeId.toString());
     grievanceList.value = [];
     await Future.delayed(const Duration(seconds: 1));
     try {
