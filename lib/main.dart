@@ -14,15 +14,14 @@ Future<void> main() async {
   await dotenv.load(fileName: ".env");
 
   runApp(
-    const MyApp(),
+    // const MyApp(),
 
     //^  with device Preview
 
-    // DevicePreview(
-    //   enabled: !kReleaseMode,
-    //   builder: (context) => const MyApp(), // Wrap your app
-    // ),
-  );
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const MyApp(), // Wrap your app
+    ),  );
 }
 
 class MyApp extends StatelessWidget {

@@ -16,7 +16,6 @@ import 'transport_controller.dart';
 
 class BookTransportController extends GetxController {
   final dio = Dio();
-  final pickupController = TextEditingController();
   final dropController = TextEditingController();
   final transportController = Get.put(TransportController());
 
@@ -26,6 +25,47 @@ class BookTransportController extends GetxController {
   //     "${OtpScreen.employeeInfo!.country} ";
 
   final home = "123 Main St, Bhubaneswar-751024, Odisha, India";
+
+  //^ select Pickup Location
+
+  RxList<String> pickupLocations = [
+    "BMT Front Gate",
+    "Kasturba Gandhi Hospital Pickup Point",
+    "MCH",
+    "Nursing Girl Hostel",
+    "Schyctrric Front Gate",
+    "SSB Gate 2",
+    "SSB Bank of Baroda Gate",
+    "SSH Emergency",
+    "SSH Peadtric",
+    "Trauma Centre Emergency Gate"
+  ].obs;
+  var selectedPickupLocation = "".obs;
+
+  void pickupLocationSelected(String value) {
+    selectedPickupLocation.value = value;
+    update();
+  }
+  //^ select Drop Location
+
+  RxList<String> dropLocations = [
+    "BMT Front Gate",
+    "Kasturba Gandhi Hospital Pickup Point",
+    "MCH",
+    "Nursing Girl Hostel",
+    "Schyctrric Front Gate",
+    "SSB Gate 2",
+    "SSB Bank of Baroda Gate",
+    "SSH Emergency",
+    "SSH Peadtric",
+    "Trauma Centre Emergency Gate"
+  ].obs;
+  var selectedDropLocation = "".obs;
+
+  void dropLocationSelected(String value) {
+    selectedDropLocation.value = value;
+    update();
+  }
 
   @override
   void onInit() {
@@ -84,8 +124,9 @@ class BookTransportController extends GetxController {
       };
       var data = {
         "pickupLocation":
-            pickupController.text, // "123 Main St Bhubaneswar India",
-        "dropLocation": dropController.text, // "456 Elm St, City, Country",
+            selectedPickupLocation.value, // "123 Main St Bhubaneswar India",
+        "dropLocation":
+            selectedDropLocation.value, // "456 Elm St, City, Country",
         "dateTime": selectOnSiteDate.value
             .replaceFirst(' ', 'T'), // "24-09-2023T15:30",
         "employeeId": OtpScreen.employeeInfo!.employeeId, //1,

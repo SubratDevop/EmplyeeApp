@@ -8,8 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/resources/app_text_size.dart';
 import '../../../../core/resources/colors.dart';
 import '../../../../core/resources/form_container_decoraion.dart';
-import '../../../../core/resources/textFormField_decoraion.dart';
 import '../../../../core/widgets/buttons/submit_btn.dart';
+import '../../../../core/widgets/custom_dropdown.dart';
 import '../../../../core/widgets/loading_indecator.dart';
 import '../controller/book_transport_controller.dart';
 
@@ -82,348 +82,117 @@ class BookTrnsportScreen extends StatelessWidget {
                         ),
                         1.kH,
                         //^ Pickup Location
+                        Container(
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 11, vertical: 12),
+                          decoration: formContainerDecoration(),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton2(
+                              isExpanded: true,
+                              offset: const Offset(0, -15),
+                              hint: Text(
+                                "Pickup Location",
+                                style: TextStyle(
+                                    fontSize: AppTextSize.h2Textsize - 2,
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xFF22262F)),
+                              ),
 
-                        GetBuilder<BookTransportController>(
-                            init: BookTransportController(),
-                            builder: (controller) {
-                              return InkWell(
-                                onTap: () {
-                                  // controller.pickUpDialog();
-                                  showDialog(
-                                    context: Get.context!,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        backgroundColor: const Color.fromARGB(
-                                            255, 255, 255, 255),
-                                        title: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                H2Text(
-                                                  tittle: "Pickup Location",
-                                                  textSize:
-                                                      AppTextSize.h2Textsize,
-                                                  textWeight: FontWeight.w600,
-                                                  tittleColor:
-                                                      const Color(0xFF22262F),
-                                                ),
-                                                Container(
-                                                  padding: EdgeInsets.zero,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                      border: Border.all(
-                                                          color: AppColor
-                                                              .curvedContainerColor
-                                                              .withOpacity(
-                                                                  0.5))),
-                                                  child: TextButton.icon(
-                                                      label: H2Text(
-                                                        tittle: "Home",
-                                                        textSize: AppTextSize
-                                                            .h2Textsize,
-                                                        textWeight:
-                                                            FontWeight.w600,
-                                                        tittleColor: AppColor
-                                                            .curvedContainerColor,
-                                                      ),
-                                                      onPressed: () {
-                                                        controller
-                                                                .pickupController
-                                                                .text =
-                                                            controller.home;
-                                                        controller.update();
-                                                      },
-                                                      icon: SvgPicture.asset(
-                                                        "assets/icons/home.svg",
-                                                        color: AppColor
-                                                            .curvedContainerColor,
-                                                      )),
-                                                )
-                                              ],
-                                            ),
-                                            1.kH,
-                                            const Divider(
-                                              color: Color(0xFFD5DAE2),
-                                              thickness: 1.5,
-                                            ),
-                                            1.kH,
-                                            TextFormField(
-                                                controller:
-                                                    controller.pickupController,
-                                                maxLines: 4,
-                                                minLines: 1,
-                                                style: GoogleFonts.outfit(
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.w400,
-                                                  color:
-                                                      const Color(0xFF22262F),
-                                                ),
-                                                decoration: formFieldDeocration(
-                                                    hintText: "Enter location"))
-                                          ],
-                                        ),
-                                        // content: ,
-                                        actions: <Widget>[
-                                          TextButton(
-                                            onPressed: () {
-                                              controller.pickupController.text =
-                                                  "";
-                                              controller.update();
-                                              Get.back();
-                                            },
-                                            child: H2Text(
-                                              tittle: "Cancel",
-                                              textSize: AppTextSize.h2Textsize,
-                                              textWeight: FontWeight.w600,
-                                              tittleColor:
-                                                  const Color(0xFF597173),
-                                            ),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              controller.update();
-                                              Get.back();
-                                            },
-                                            child: H2Text(
-                                              tittle: "Confirm",
-                                              textSize: AppTextSize.h2Textsize,
-                                              textWeight: FontWeight.w600,
-                                              tittleColor:
-                                                  AppColor.primaryColor,
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    },
+                              value:
+                                  controller.selectedPickupLocation.value == ""
+                                      ? null
+                                      : controller.selectedPickupLocation.value,
+                              dropdownMaxHeight: ScreenSize.width(context) / 2,
+                              // isDense: true,
+                              style: GoogleFonts.outfit(
+                                fontSize: AppTextSize.h2Textsize,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xFF22262F),
+                              ),
+                              icon: SvgPicture.asset(
+                                'assets/icons/arrow_down.svg',
+                                height: 10,
+                                width: 10,
+                              ),
+
+                              items: controller.pickupLocations.map(
+                                (e) {
+                                  return DropdownMenuItem(
+                                    value: e.toString(),
+                                    child: Text(
+                                      e.toString(),
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   );
                                 },
-                                child: Container(
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: formContainerDecoration(),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                              'assets/icons/location.svg'),
-                                          5.kW,
-                                          H2Text(
-                                            tittle: "Pickup Location",
-                                            textSize:
-                                                AppTextSize.h2Textsize - 3,
-                                            textWeight: FontWeight.w600,
-                                            tittleColor:
-                                                const Color(0xFF22262F),
-                                          ),
-                                        ],
-                                      ),
-                                      2.kH,
-                                      Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                            'assets/icons/location.svg',
-                                            color: Colors.transparent,
-                                          ),
-                                          5.kW,
-                                          Expanded(
-                                            child: H2Text(
-                                              tittle: controller
-                                                  .pickupController.text,
-                                              maxTextlines: 2,
-                                              // textWeight: FontWeight.w700,
-                                              textOverflow:
-                                                  TextOverflow.ellipsis,
-                                              textSize:
-                                                  AppTextSize.h2Textsize - 3,
-                                              tittleColor:
-                                                  const Color(0xFF516078),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            }),
+                              ).toList(),
+                              // Define the onChanged callback
+
+                              onChanged: (String? value) {
+                                controller.pickupLocationSelected(value!);
+                              },
+                            ),
+                          ),
+                        ),
+
                         //^ Drop Location
-                        8.kH,
-                        GetBuilder<BookTransportController>(
-                            init: BookTransportController(),
-                            builder: (controller) {
-                              return InkWell(
-                                onTap: () {
-                                  showDialog(
-                                    context: Get.context!,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        backgroundColor: const Color.fromARGB(
-                                            255, 255, 255, 255),
-                                        title: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                H2Text(
-                                                  tittle: "Drop Location",
-                                                  textSize:
-                                                      AppTextSize.h2Textsize,
-                                                  textWeight: FontWeight.w600,
-                                                  tittleColor:
-                                                      const Color(0xFF22262F),
-                                                ),
-                                                Container(
-                                                  padding: EdgeInsets.zero,
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                      border: Border.all(
-                                                          color: AppColor
-                                                              .curvedContainerColor
-                                                              .withOpacity(
-                                                                  0.5))),
-                                                  child: TextButton.icon(
-                                                      label: H2Text(
-                                                        tittle: "Home",
-                                                        textSize: AppTextSize
-                                                            .h2Textsize,
-                                                        textWeight:
-                                                            FontWeight.w600,
-                                                        tittleColor: AppColor
-                                                            .curvedContainerColor,
-                                                      ),
-                                                      onPressed: () {
-                                                        controller
-                                                                .dropController
-                                                                .text =
-                                                            controller.home;
-                                                        controller.update();
-                                                      },
-                                                      icon: SvgPicture.asset(
-                                                        "assets/icons/home.svg",
-                                                        color: AppColor
-                                                            .curvedContainerColor,
-                                                      )),
-                                                )
-                                              ],
-                                            ),
-                                            1.kH,
-                                            const Divider(
-                                              color: Color(0xFFD5DAE2),
-                                              thickness: 1.5,
-                                            ),
-                                            1.kH,
-                                            TextFormField(
-                                                controller:
-                                                    controller.dropController,
-                                                maxLines: 4,
-                                                minLines: 1,
-                                                style: GoogleFonts.outfit(
-                                                  fontSize: 19,
-                                                  fontWeight: FontWeight.w400,
-                                                  color:
-                                                      const Color(0xFF22262F),
-                                                ),
-                                                decoration: formFieldDeocration(
-                                                    hintText: "Enter location"))
-                                          ],
-                                        ),
-                                        // content: ,
-                                        actions: <Widget>[
-                                          TextButton(
-                                            onPressed: () {
-                                              controller.dropController.text =
-                                                  "";
-                                              controller.update();
-                                              Get.back();
-                                            },
-                                            child: H2Text(
-                                              tittle: "Cancel",
-                                              textSize: AppTextSize.h2Textsize,
-                                              textWeight: FontWeight.w600,
-                                              tittleColor:
-                                                  const Color(0xFF597173),
-                                            ),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              controller.update();
-                                              Get.back();
-                                            },
-                                            child: H2Text(
-                                              tittle: "Confirm",
-                                              textSize: AppTextSize.h2Textsize,
-                                              textWeight: FontWeight.w600,
-                                              tittleColor:
-                                                  AppColor.primaryColor,
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    },
+                        10.kH,
+                        Container(
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 11, vertical: 12),
+                          decoration: formContainerDecoration(),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton2(
+                              isExpanded: true,
+                              offset: const Offset(0, -15),
+                              hint: Text(
+                                "Drop Location",
+                                style: TextStyle(
+                                    fontSize: AppTextSize.h2Textsize - 2,
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xFF22262F)),
+                              ),
+
+                              value: controller.selectedDropLocation.value == ""
+                                  ? null
+                                  : controller.selectedDropLocation.value,
+                              dropdownMaxHeight: ScreenSize.width(context) / 2,
+                              // isDense: true,
+                              style: GoogleFonts.outfit(
+                                fontSize: AppTextSize.h2Textsize,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xFF22262F),
+                              ),
+                              icon: SvgPicture.asset(
+                                'assets/icons/arrow_down.svg',
+                                height: 10,
+                                width: 10,
+                              ),
+
+                              items: controller.dropLocations.map(
+                                (e) {
+                                  return DropdownMenuItem(
+                                    value: e.toString(),
+                                    child: Text(
+                                      e.toString(),
+                                      maxLines: 3,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   );
                                 },
-                                child: Container(
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: formContainerDecoration(),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                              'assets/icons/location.svg'),
-                                          5.kW,
-                                          H2Text(
-                                            tittle: "Drop Location",
-                                            textSize:
-                                                AppTextSize.h2Textsize - 3,
-                                            textWeight: FontWeight.w600,
-                                            tittleColor:
-                                                const Color(0xFF22262F),
-                                          ),
-                                        ],
-                                      ),
-                                      2.kH,
-                                      Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                            'assets/icons/location.svg',
-                                            color: Colors.transparent,
-                                          ),
-                                          5.kW,
-                                          Expanded(
-                                            child: H2Text(
-                                              tittle: controller
-                                                  .dropController.text,
-                                              maxTextlines: 2,
-                                              // textWeight: FontWeight.w700,
-                                              textOverflow:
-                                                  TextOverflow.ellipsis,
-                                              textSize:
-                                                  AppTextSize.h2Textsize - 3,
-                                              tittleColor:
-                                                  const Color(0xFF516078),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            }),
+                              ).toList(),
+                              // Define the onChanged callback
+
+                              onChanged: (String? value) {
+                                controller.dropLocationSelected(value!);
+                              },
+                            ),
+                          ),
+                        ),
+
                         7.kH,
                         H2Text(
                           tittle: "Pick Date and Time",
@@ -464,8 +233,7 @@ class BookTrnsportScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                       
-                       
+
                         20.kH,
                         controller.savingTransport.value == true
                             ? const LoadingIndicator()

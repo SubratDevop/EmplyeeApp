@@ -1,9 +1,7 @@
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:employee_app/screens/common_screen/otp_screen/otp_screen.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/urls/app_urls.dart';
 import '../../../../core/utils/enums.dart';
 import '../../../../core/widgets/app_snackbar.dart';
